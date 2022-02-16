@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<link rel="stylesheet" href="css/style.css">
+<title>Menu</title>
+</head>
+
+<body>
+	<div id="app">
+		<des :id="7"></des>
+		
+		<main class="main">
+			<div class="main__container">
+				<div class="tiles">
+
+					<div class="tiles__main-tile main-tile">
+						<div class="main-tile__reported">
+							<div class="main-tile__photo">
+								<img src="img/image-jeremy.png" alt="User">
+							</div>
+							<div class="main-tile__username">
+								<p>Report for</p>
+								<p class="main-tile__name">Jeremy Robson</p>
+							</div>
+						</div>
+						<div class="main-tile__timeframes">
+							<p :class="{active: daily}" @click="toggleTimeframes()">Daily</p>
+							<p :class="{active: weekly}" @click="toggleTimeframes()">Weekly</p>
+							<p :class="{active: monthly}" @click="toggleTimeframes()">Monthly</p>
+						</div>
+					</div>
+
+					<div class="tiles__tile tile" v-for="(active, i) in data">
+						<div class="tile__back-image" :style="{background: active.color}">
+							<img :src="active.src" :alt="active.title">
+						</div>
+						<div class="tile__container">
+							<div class="tile__first-line">
+								<div class="tile__title">
+									<p>{{active.title}}</p>
+								</div>
+								<div class="tile__more">
+									<img src="img/icon-ellipsis.svg" alt="More">
+								</div>
+							</div>
+							<div class="tile__second-line">
+								<div class="tile__hours">
+									<p>
+										<span v-if="daily">{{active.timeframes.daily.current}}</span>
+										<span v-else-if="weekly">{{active.timeframes.weekly.current}}</span>
+										<span v-else-if="monthly">{{active.timeframes.monthly.current}}</span>hrs
+									</p>
+								</div>
+								<div class="tile__last">
+									<p>Last
+										<span v-if="daily">Day</span>
+										<span v-else-if="weekly">Week</span>
+										<span v-else-if="monthly">Month</span>
+										-
+										<span v-if="daily">{{active.timeframes.daily.previous}}</span>
+										<span v-else-if="weekly">{{active.timeframes.weekly.previous}}</span>
+										<span v-else-if="monthly">{{active.timeframes.monthly.previous}}</span>
+										hrs
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+	</div>
+	<script src="js/script.min.js"></script>
+<script src="/js/desc.js"></script>
+</body>
+
+</html>
